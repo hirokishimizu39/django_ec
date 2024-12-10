@@ -12,3 +12,5 @@ ALLOWED_HOSTS = ['*']
 DATABASES = {
     "default": env.db(),
 }
+
+INSTALLED_APPS.insert(0, 'whitenoise.runserver_nostatic')
