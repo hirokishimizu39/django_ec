@@ -19,3 +19,14 @@ CLOUDINARY_STORAGE  = {
     'API_KEY': env('CLOUDINARY_API_KEY'),
     'API_SECRET': env('CLOUDINARY_API_SECRET')
 }
+
+STORAGES = {
+    'staticfiles': {
+        'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
+    },
+    'default': {
+        "BACKEND": 'cloudinary_storage.storage.MediaCloudinaryStorage',
+    },
+}
+MEDIA_URL = '/media/'  # 本番用 URL (Cloudinary が自動提供)
+MEDIA_ROOT = None  # Cloudinary 使用時は不要
