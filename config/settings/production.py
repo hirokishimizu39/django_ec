@@ -22,3 +22,24 @@ STORAGES = {
 }
 MEDIA_URL = '/media/'  # 本番用 URL (Cloudinary が自動提供)
 MEDIA_ROOT = None  # Cloudinary 使用時は不要
+
+
+
+
+
+# 500エラー出るのでデバッグ機能有効にする
+DEBUG = True
+
+if DEBUG:
+    def show_toolbar(request):
+        return True
+
+    INSTALLED_APPS += (
+        'debug_toolbar',
+    )
+    MIDDLEWARE += (
+        'debug_toolbar.middleware.DebugToolbarMiddleware',
+    )
+    DEBUG_TOOLBAR_CONFIG = {
+        'SHOW_TOOLBAR_CALLBACK': show_toolbar,
+    }
