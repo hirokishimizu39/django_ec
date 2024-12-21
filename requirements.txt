@@ -11,3 +11,6 @@ pillow==10.4.0
 
 #画像をアップロードする
 django-cloudinary-storage==0.3.0
+
+# Debug toolbar
+django-debug-toolbar==4.3.0
