@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}商品詳細ページ{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="row gx-4 gx-lg-5 align-items-center">
+            <div class="col-md-6">
+                <img class="card-img-top"
+                    src="{% if product.image %}{{ product.image.url }}{% else %}/static/setup_completed.png{% endif %}"
+                    alt="{{ product.name }}">
+            </div>
+            <div class="col-md-6">
+                <h1 class="display-5 fw-bolder">{{ product.name }}</h1>
+                <div class="fs-5 mb-5">
+                    <span class="text-decoration-line-through">{{ product.price }}</span>
+                    <span>$40.00</span>
+                </div>
+                <p class="lead">{{ product.description }}</p>
+                <div class="d-flex">
+                    <input class="form-control text-center me-3" type="number" value="1" style="max-width: 3rem;">
+                    <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                        <i class="bi-cart-fill me-1"></i>
+                        カート入れる
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Related items section-->
+<section class="py-5 bg-light">
+    <div class="container px-4 px-lg-5 mt-5">
+        <h2 class="fw-bolder mb-4">関連する新しい商品</h2>
+        {% if latest_products_list %}
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            {% for product in latest_products_list %}
+                {% include 'shop/product_card.html' %}
+            {% endfor %}
+        </div>
+        {% else %}
+        <p>関連する商品はありません。</p>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

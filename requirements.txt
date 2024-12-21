@@ -1,3 +1,16 @@
 Django==4.2.5
 django-environ==0.11.2
 psycopg==3.1.12
+gunicorn==23.0.0
+
+# 静的ファイルを取り扱う
+whitenoise==6.7.0
+
+# 画像を扱う
+pillow==10.4.0
+
+#画像をアップロードする
+django-cloudinary-storage==0.3.0
+
+# Debug toolbar
+django-debug-toolbar==4.3.0
