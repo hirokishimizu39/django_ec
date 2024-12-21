@@ -19,6 +19,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 env = environ.Env()
 
+environ.Env.read_env(env_file=str(BASE_DIR) + "/.env")
+
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = env("SECRET_KEY")
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -95,6 +100,13 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
+
+# Database
+# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+DATABASES = {
+    "default": env.db(),
+}
 
 
 # Static files (CSS, JavaScript, Images)
