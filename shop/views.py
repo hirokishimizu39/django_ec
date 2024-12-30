@@ -25,3 +25,11 @@ class ProductDetailView(DetailView):
         context['latest_products_list'] = Product.objects.order_by("-created_at")[:5]
         print(context)  # 確認
         return context
+    
+
+class AdminProductListView(ListView):
+    model = Product
+    template_name = 'shop/admin_products_list.html'
+    context_object_name = 'products'
+
+
