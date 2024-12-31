@@ -11,5 +11,6 @@ urlpatterns = [
     # 管理者用の商品管理ページ 'admin/products/'
     path('list/', views.AdminProductListView.as_view(), name='admin_products_list'),
     path('create/', views.AdminProductCreateView.as_view(), name='admin_product_create'),
+    path('edit/<int:pk>/', views.AdminProductUpdateView.as_view(), name='admin_product_edit'),
     path('', views.AdminProductListView.as_view(), name='admin_products_list'),
 ]
