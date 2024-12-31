@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Product
 from .forms import ProductForm
 from django.urls import reverse_lazy
@@ -44,4 +44,9 @@ class AdminProductUpdateView(UpdateView):
     model = Product
     form_class = ProductForm
     template_name = 'shop/admin_product_form.html'
+    success_url = reverse_lazy('shop:admin_products_list')
+
+class AdminProductDeleteView(DeleteView):
+    model = Product
+    template_name = 'shop/admin_product_confirm_delete.html'
     success_url = reverse_lazy('shop:admin_products_list')
