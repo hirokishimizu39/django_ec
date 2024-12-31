@@ -1,6 +1,8 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
 from .models import Product
+from .forms import ProductForm
+from django.urls import reverse_lazy
 
 # Create your views here.
 class ProductListView(ListView):
@@ -31,5 +33,3 @@ class AdminProductListView(ListView):
     model = Product
     template_name = 'shop/admin_products_list.html'
     context_object_name = 'products'
-
-
