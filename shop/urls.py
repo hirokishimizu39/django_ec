@@ -8,7 +8,8 @@ urlpatterns = [
     path('index/', views.ProductListView.as_view(), name='product_list'),
     path('detail/<int:pk>', views.ProductDetailView.as_view(), name='product_details'),
 
-    # 管理者用の商品管理ページ
+    # 管理者用の商品管理ページ 'admin/products/'
     path('list/', views.AdminProductListView.as_view(), name='admin_products_list'),
+    path('create/', views.AdminProductCreateView.as_view(), name='admin_product_create'),
     path('', views.ProductListView.as_view(), name='product_list'),
 ]

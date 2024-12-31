@@ -33,3 +33,9 @@ class AdminProductListView(ListView):
     model = Product
     template_name = 'shop/admin_products_list.html'
     context_object_name = 'products'
+
+class AdminProductCreateView(CreateView):
+    model = Product
+    form_class = ProductForm
+    template_name = 'shop/admin_product_form.html'
+    success_url = reverse_lazy('shop:admin_products_list')
