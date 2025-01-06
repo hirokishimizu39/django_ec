@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'shop.apps.ShopConfig',
     'cloudinary_storage',
     'cloudinary',
+    'whitenoise.runserver_nostatic',
 ]
 
 MIDDLEWARE = [
