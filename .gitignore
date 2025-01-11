@@ -3,4 +3,5 @@
 *.pyc
 __pycache__/
 static/shop/
+!static/shop/css/additional.css
 staticfiles/
