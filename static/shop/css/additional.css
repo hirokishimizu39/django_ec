@@ -1,0 +1,17 @@
+/* Body をフレックスコンテナにする */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* コンテンツ領域をフレックスで伸縮 */
+.content {
+    flex: 1;
+}
+
+/* フッターのスタイル調整 */
+footer {
+    margin-top: auto;
+}
