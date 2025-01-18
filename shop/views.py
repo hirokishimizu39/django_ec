@@ -1,8 +1,11 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Product
+from .forms import ProductForm
+from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
+from basicauth.decorators import basic_auth_required
 
-# Create your views here.
 class ProductListView(ListView):
     model = Product
     template_name = 'shop/index.html'
@@ -25,3 +28,30 @@ class ProductDetailView(DetailView):
         context['latest_products_list'] = Product.objects.order_by("-created_at")[:5]
         print(context)  # 確認
         return context
+
+
+@method_decorator(basic_auth_required, name='dispatch')
+class AdminProductListView(ListView):
+    model = Product
+    template_name = 'shop/admin_products_list.html'
+    context_object_name = 'products'
+
+@method_decorator(basic_auth_required, name='dispatch')
+class AdminProductCreateView(CreateView):
+    model = Product
+    form_class = ProductForm
+    template_name = 'shop/admin_product_form.html'
+    success_url = reverse_lazy('shop:admin_products_list')
+
+@method_decorator(basic_auth_required, name='dispatch')
+class AdminProductUpdateView(UpdateView):
+    model = Product
+    form_class = ProductForm
+    template_name = 'shop/admin_product_form.html'
+    success_url = reverse_lazy('shop:admin_products_list')
+
+@method_decorator(basic_auth_required, name='dispatch')
+class AdminProductDeleteView(DeleteView):
+    model = Product
+    template_name = 'shop/admin_product_confirm_delete.html'
+    success_url = reverse_lazy('shop:admin_products_list')
