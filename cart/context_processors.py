@@ -1,11 +1,12 @@
-from .utils import get_or_create_cart
-from django.db.models import Sum
+from .utils import get_or_create_cart, total_cart_item_quantity
+
 
 def cart_quantities(request):
     cart = get_or_create_cart(request)
     if cart:
-        total_product_quantities_in_cart_items = cart.items.aggregate(total_quantity=Sum('quantity'))['total_quantity'] or 0
+        total_cart_item = total_cart_item_quantity(cart)
     else:
-        total_product_quantities_in_cart_items = 0
-    return {'total_product_quantities_in_cart_items': total_product_quantities_in_cart_items}
+        total_cart_item = 0
+    return {'total_cart_item': total_cart_item}
+
 
