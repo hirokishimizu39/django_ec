@@ -41,17 +41,17 @@ class AdminProductCreateView(CreateView):
     model = Product
     form_class = ProductForm
     template_name = 'shop/admin_product_form.html'
-    success_url = reverse_lazy('shop:admin_products_list')
+    success_url = reverse_lazy('admin_products_list')
 
 @method_decorator(basic_auth_required, name='dispatch')
 class AdminProductUpdateView(UpdateView):
     model = Product
     form_class = ProductForm
     template_name = 'shop/admin_product_form.html'
-    success_url = reverse_lazy('shop:admin_products_list')
+    success_url = reverse_lazy('admin_products_list')
 
 @method_decorator(basic_auth_required, name='dispatch')
 class AdminProductDeleteView(DeleteView):
     model = Product
     template_name = 'shop/admin_product_confirm_delete.html'
-    success_url = reverse_lazy('shop:admin_products_list')
+    success_url = reverse_lazy('admin_products_list')

@@ -19,10 +19,18 @@ from django.urls import path, include
 from django.views.generic.base import TemplateView
 from django.conf import settings
 from django.conf.urls.static import static
+from shop import views
 
 urlpatterns = [
-    path('admin/products/', include('shop.urls')),
+    # 管理者用の商品管理ページ 'admin/products/'
+    path('admin/products/list/', views.AdminProductListView.as_view(), name='admin_products_list'),
+    path('admin/products/create/', views.AdminProductCreateView.as_view(), name='admin_product_create'),
+    path('admin/products/edit/<int:pk>/', views.AdminProductUpdateView.as_view(), name='admin_product_edit'),
+    path('admin/products/delete/<int:pk>/', views.AdminProductDeleteView.as_view(), name='admin_product_delete'),
+
+    # django標準の管理者機能
     path('admin/', admin.site.urls),
+
     path('hello/', TemplateView.as_view(template_name='hello.html')),
     path('cart/', include('cart.urls')),
     path('', include('shop.urls')),
