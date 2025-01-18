@@ -9,7 +9,11 @@ def add_to_cart_view(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     quantity = int(request.POST.get('quantity', 1))
     add_to_cart(request, product, quantity)
-    return redirect('shop:product_list')
+    
+    # カートに入れる押下時、一覧画面からなら一覧画面に、詳細画面からなら詳細画面にリダイレクト
+    # Refererヘッダーは信頼性が低いため、ない場合は無条件で一覧画面へリダイレクト
+    referer_url = request.META.get('HTTP_REFERER')
+    return redirect(referer_url if referer_url else 'shop:product_list')
 
 def remove_from_cart_view(request, product_id):
     """カートから商品を削除するビュー"""
