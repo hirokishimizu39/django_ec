@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'cart.apps.CartConfig',
     'cloudinary_storage',
     'cloudinary',
+    'whitenoise.runserver_nostatic',
 ]
 
 MIDDLEWARE = [
@@ -125,3 +126,7 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+BASICAUTH_USERS = {
+    'admin': 'action',  # ユーザー名: パスワード
+}

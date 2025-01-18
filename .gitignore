@@ -2,5 +2,4 @@
 *.log
 *.pyc
 __pycache__/
-static/shop/
 staticfiles/

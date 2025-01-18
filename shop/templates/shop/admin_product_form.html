@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>{% if form.instance.pk %}商品編集{% else %}商品追加{% endif %}</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">保存</button>
+        <a href="{% url 'shop:admin_products_list' %}" class="btn btn-secondary">戻る</a>
+    </form>
+</div>
+{% endblock %}
