@@ -21,12 +21,12 @@ def cart_view(request):
     """カートの中身を表示するビュー"""
     cart = get_or_create_cart(request)
     items = cart.items.select_related('product')
-    product_quantities_in_cart_items = items.aggregate(total_quantity=Sum('quantity'))['total_quantity'] or 0
+    total_product_quantities_in_cart_items = items.aggregate(total_quantity=Sum('quantity'))['total_quantity'] or 0
     total_price = cart.totalCartItemPrice()
     return render(request, 'cart/cart.html', {
         'cart': cart, 
         'items': items, 
-        'product_quantities_in_cart_items': product_quantities_in_cart_items,
+        'total_product_quantities_in_cart_items': total_product_quantities_in_cart_items,
         'total_price': total_price
     })
 

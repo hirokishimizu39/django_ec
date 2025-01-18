@@ -44,7 +44,7 @@
             <a href="{% url 'cart:cart_view' %}" class="btn btn-outline-dark">
               <i class="bi-cart-fill me-1"></i>
               カート
-              <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+              <span class="badge bg-dark text-white ms-1 rounded-pill">{{ total_product_quantities_in_cart_items }}</span>
             </a>
           </form>
         </div>
