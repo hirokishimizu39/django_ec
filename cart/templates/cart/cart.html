@@ -36,7 +36,11 @@
                                     <div>
                                         <h6 class="my-0">{{ item.product.name }}</h6>
                                         <small class="text-body-secondary">{{ item.product.description }}</small>
-                                        <div class="d-flex">
+
+                                    </div>
+                                    <div>
+                                        <span class="text-body-secondary text-end">{{ item.product.price }}</span>
+                                        <div class="d-flex" style="height: 50%;">
                                             <span class="badge bg-dark text-white ms-1 rounded-pill">{{ item.quantity }}</span>
                                             <form action="{% url 'cart:remove_from_cart' item.product.id %}" method="post" class="d-inline">
                                                 {% csrf_token %}
@@ -44,7 +48,6 @@
                                             </form>
                                         </div>
                                     </div>
-                                    <span class="text-body-secondary">{{ item.product.price }}</span>
                                 </li>
                             {% endfor %}
                                 <!-- if (isValidPromotionCode): -->

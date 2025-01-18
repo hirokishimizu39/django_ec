@@ -6,8 +6,8 @@ def get_or_create_cart(request):
     if not session_key:
         request.session.create()
         session_key = request.session.session_key
-
-    cart = Cart.objects.get_or_create(session_id=session_key)
+    
+    cart, created = Cart.objects.get_or_create(session_id=session_key)
     return cart
 
 
