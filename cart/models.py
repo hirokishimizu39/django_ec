@@ -25,3 +25,4 @@ class CartItem(models.Model):
     def subtotal(self):
         """アイテムの小計を計算"""
         return self.product.price * self.quantity
+

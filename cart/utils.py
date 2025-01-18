@@ -25,3 +25,5 @@ def add_to_cart(request, product, quantity=1):
 def remove_from_cart(request, product):
     cart = get_or_create_cart(request)
     CartItem.objects.filter(cart=cart, product=product).delete()
+
+    

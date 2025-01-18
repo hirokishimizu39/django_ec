@@ -8,3 +8,4 @@ def cart_quantities(request):
     else:
         total_product_quantities_in_cart_items = 0
     return {'total_product_quantities_in_cart_items': total_product_quantities_in_cart_items}
+

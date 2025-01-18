@@ -55,3 +55,6 @@ class AdminProductDeleteView(DeleteView):
     model = Product
     template_name = 'shop/admin_product_confirm_delete.html'
     success_url = reverse_lazy('admin_products_list')
+
+
+    
