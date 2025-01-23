@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .utils import get_or_create_cart, add_to_cart, remove_from_cart, total_cart_item_price, total_cart_item_quantity
+from .utils import get_or_create_cart, remove_from_cart, total_cart_item_price, total_cart_item_quantity
 from shop.models import Product
 
 
@@ -7,7 +7,8 @@ def add_to_cart_view(request, product_id):
     """商品をカートに追加するビュー"""
     product = get_object_or_404(Product, id=product_id)
     quantity = int(request.POST.get('quantity', 1))
-    add_to_cart(request, product, quantity)
+    cart = get_or_create_cart(request)
+    cart.add_to_cart(product, quantity)
     
     # カートに入れる押下時、一覧画面からなら一覧画面に、詳細画面からなら詳細画面にリダイレクト
     # Refererヘッダーは信頼性が低いため、ない場合は無条件で一覧画面へリダイレクト
