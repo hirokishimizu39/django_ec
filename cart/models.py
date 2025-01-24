@@ -20,6 +20,9 @@ class Cart(models.Model):
             cart_item.quantity = quantity
         cart_item.save()
 
+    def remove_item(self, product):
+        """カートから商品を削除"""
+        CartItem.objects.filter(cart=self, product=product).delete()
 
 class CartItem(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='items')

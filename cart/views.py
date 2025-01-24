@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .utils import get_or_create_cart, remove_from_cart, total_cart_item_price, total_cart_item_quantity
+from .utils import get_or_create_cart, total_cart_item_price, total_cart_item_quantity
 from shop.models import Product
 
 
@@ -18,7 +18,8 @@ def add_to_cart_view(request, product_id):
 def remove_from_cart_view(request, product_id):
     """カートから商品を削除するビュー"""
     product = get_object_or_404(Product, id=product_id)
-    remove_from_cart(request, product)
+    cart = get_or_create_cart(request)
+    cart.remove_item(product)
     return redirect('cart:cart_view')
 
 def cart_view(request):

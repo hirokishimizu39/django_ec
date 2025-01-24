@@ -11,13 +11,6 @@ def get_or_create_cart(request):
     cart, created = Cart.objects.get_or_create(session_id=session_key)
     return cart
 
-
-
-def remove_from_cart(request, product):
-    cart = get_or_create_cart(request)
-    CartItem.objects.filter(cart=cart, product=product).delete()
-
-
 def total_cart_item_quantity(cart):
     cart_items = cart.items.all()
     total_quantity = 0
