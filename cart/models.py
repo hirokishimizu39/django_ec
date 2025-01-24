@@ -11,7 +11,7 @@ class Cart(models.Model):
         db_table = 'carts'
 
     
-    def add_to_cart(self, product, quantity=1):
+    def add_item(self, product, quantity=1):
         """カートに商品を1つ追加、または入力された数量分更新"""
         cart_item, created = self.items.get_or_create(cart=self, product=product)
         if not created:

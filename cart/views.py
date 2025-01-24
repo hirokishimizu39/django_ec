@@ -8,7 +8,7 @@ def add_to_cart_view(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     quantity = int(request.POST.get('quantity', 1))
     cart = get_or_create_cart(request)
-    cart.add_to_cart(product, quantity)
+    cart.add_item(product, quantity)
     
     # カートに入れる押下時、一覧画面からなら一覧画面に、詳細画面からなら詳細画面にリダイレクト
     # Refererヘッダーは信頼性が低いため、ない場合は無条件で一覧画面へリダイレクト
