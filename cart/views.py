@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .utils import get_or_create_cart, total_cart_item_price, total_cart_item_quantity
+from .utils import get_or_create_cart
 from shop.models import Product
 
 
@@ -26,8 +26,8 @@ def cart_view(request):
     """カートの中身を表示するビュー"""
     cart = get_or_create_cart(request)
     items = cart.items.select_related('product')
-    total_cart_item = total_cart_item_quantity(cart)
-    total_price = total_cart_item_price(cart)
+    total_cart_item = cart.total_quantity
+    total_price = cart.total_price
     return render(request, 'cart/cart.html', {
         'cart': cart, 
         'items': items, 

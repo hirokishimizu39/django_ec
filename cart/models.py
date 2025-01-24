@@ -24,6 +24,17 @@ class Cart(models.Model):
         """カートから商品を削除"""
         CartItem.objects.filter(cart=self, product=product).delete()
 
+    @property
+    def total_quantity(self):
+        """カートアイテムの合計数量"""
+        return sum(item.quantity for item in self.items.all())
+    
+    @property
+    def total_price(self):
+        """カートアイテムの合計金額"""
+        return sum(item.subtotal() for item in self.items.all())
+
+    
 class CartItem(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='items')
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
@@ -33,4 +44,6 @@ class CartItem(models.Model):
         db_table = 'cart_items'
 
 
-
+    def subtotal(self):
+        """カートアイテムの小計"""
+        return self.product.price * self.quantity
