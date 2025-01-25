@@ -3,7 +3,7 @@
 {% block content %}
 <div class="container">
     <h2>商品一覧</h2>
-    <a href="{% url 'shop:admin_product_create'%}" class="btn btn-primary mb-3">新規商品追加</a>
+    <a href="{% url 'admin_product_create'%}" class="btn btn-primary mb-3">新規商品追加</a>
     <table class="table">
         <thead>
             <tr>
@@ -22,8 +22,8 @@
                 <td style="max-width: 450px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ product.description }}</td>
                 <td style="max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ product.price }}</td>
                 <td>
-                    <a href="{% url 'shop:admin_product_edit' product.pk %}" class="btn btn-warning">編集</a>
-                    <a href="{% url 'shop:admin_product_delete' product.pk %}" class="btn btn-danger">削除</a>
+                    <a href="{% url 'admin_product_edit' product.pk %}" class="btn btn-warning">編集</a>
+                    <a href="{% url 'admin_product_delete' product.pk %}" class="btn btn-danger">削除</a>
                 </td>
             </tr>
             {% endfor %}
@@ -31,3 +31,4 @@
     </table>
 </div>
 {% endblock %}
+

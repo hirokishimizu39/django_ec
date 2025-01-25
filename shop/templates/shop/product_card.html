@@ -22,7 +22,15 @@
         <div class="card-footer p-4 bg-transparent border-top-0">
             <div class="text-center">
                 <a class="btn btn-outline-dark mt-auto" href="{% url 'shop:product_details' product.pk %}">詳細を見る</a>
+
+                <form action="{% url 'cart:add_to_cart' product.pk %}" method="post" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-dark mt-auto">カートに入れる</button>
+                </form>
             </div>
         </div>
     </div>
 </div>
+
+
+
