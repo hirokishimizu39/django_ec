@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
 from .utils import get_or_create_cart
 from shop.models import Product
+from order.forms import BillingAddressForm, PaymentInfoForm
 
 
 def add_to_cart_view(request, product_id):
@@ -34,4 +36,21 @@ def cart_view(request):
         'total_cart_item': total_cart_item,
         'total_price': total_price
     })
+
+def cart_saved_info(request):
+    """購入に失敗した際に入力した情報を保持したまま表示するビュー"""
+    cart = get_or_create_cart(request)
+    items = cart.items.select_related('product')
+    total_cart_item = cart.total_quantity
+    total_price = cart.total_price
+    context = {
+        'cart': cart,
+        'items': items,
+        'total_cart_item': total_cart_item,
+        'total_price': total_price,
+        'billing_form': BillingAddressForm(),
+        'payment_form': PaymentInfoForm(),
+    }
+    return render(request, 'cart/cart.html', context)
+
 
