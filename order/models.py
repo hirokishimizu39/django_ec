@@ -23,7 +23,7 @@ class BillingAddress(models.Model):
     country = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
     zip_code = models.CharField(max_length=20)
-    save_info = models.BooleanField(default=False)
+    is_saved_billing_address_info = models.BooleanField(default=False)
 
     def __str__(self):
         return f"BillingAddress {self.id} for order {self.order.id}"
@@ -35,7 +35,7 @@ class PaymentInfo(models.Model):
     card_number = models.CharField(max_length=16)
     expiry_date = models.CharField(max_length=5)
     cvv = models.CharField(max_length=4)
-    save_info = models.BooleanField(default=False)
+    is_saved_payment_info = models.BooleanField(default=False)
 
     def __str__(self):
         return f"PaymentInfo {self.id} for order {self.order.id}"
