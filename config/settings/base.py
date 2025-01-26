@@ -128,6 +128,8 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+# Basic認証の設定
 BASICAUTH_USERS = {
-    'admin': 'action',  # ユーザー名: パスワード
+    'admin': 'pw'
 }
+

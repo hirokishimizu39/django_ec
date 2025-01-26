@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}購入明細一覧{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="mb-4">購入明細一覧</h1>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>注文番号</th>
+                    <th>注文日時</th>
+                    <th>お客様名</th>
+                    <th>合計金額</th>
+                    <th>ステータス</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.created_at|date:"Y/m/d H:i" }}</td>
+                    <td>{{ order.billingaddress.last_name }} {{ order.billingaddress.first_name }}</td>
+                    <td>¥{{ order.total_price }}</td>
+                    <td>
+                        {% if order.is_completed %}
+                        <span class="badge bg-success">完了</span>
+                        {% else %}
+                        <span class="badge bg-warning">処理中</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{% url 'order:order_detail' order.id %}" class="btn btn-sm btn-primary">詳細</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6" class="text-center">購入明細がありません。</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %} 

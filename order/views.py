@@ -7,6 +7,9 @@ from cart.utils import get_or_create_cart
 from django.db import transaction
 from django.conf import settings
 from .utils import send_order_confirmation_email
+from django.views.generic import ListView, DetailView
+from django.utils.decorators import method_decorator
+from basicauth.decorators import basic_auth_required
 
 @require_POST
 def purchase(request):
@@ -66,3 +69,20 @@ def purchase(request):
                 for error in errors:
                     messages.error(request, f'{payment_form.fields[field].label}: {error}')
             return redirect('cart:cart_saved_info')
+
+
+@method_decorator(basic_auth_required, name='dispatch')
+class OrderListView(ListView):
+    model = Order
+    template_name = 'order/order_list.html'
+    context_object_name = 'orders'
+    ordering = ['-created_at']
+
+
+@method_decorator(basic_auth_required, name='dispatch')
+class OrderDetailView(DetailView):
+    model = Order
+    template_name = 'order/order_detail.html'
+    context_object_name = 'order'
+
+
