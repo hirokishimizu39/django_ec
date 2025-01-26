@@ -20,7 +20,7 @@ admin.site.register(PaymentInfo, PaymentInfoAdmin)
 
 
 class OrderItemAdmin(admin.ModelAdmin):
-    list_display = ('order', 'product', 'quantity', 'price')
+    list_display = ('order', 'product_name', 'product_quantity', 'product_price')
 
 admin.site.register(OrderItem, OrderItemAdmin)
 

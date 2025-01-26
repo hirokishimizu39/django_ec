@@ -44,9 +44,9 @@ def purchase(request):
             for cart_item in cart.items.all():
                 OrderItem.objects.create(
                     order=order,
-                    product=cart_item.product,
-                    quantity=cart_item.quantity,
-                    price=cart_item.product.price
+                    product_name=cart_item.product.name,
+                    product_quantity=cart_item.quantity,
+                    product_price=cart_item.product.price
                 )
 
             # メール送信

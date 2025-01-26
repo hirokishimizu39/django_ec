@@ -43,9 +43,9 @@ class PaymentInfo(models.Model):
 
 class OrderItem(models.Model):
     order = models.ForeignKey('Order', on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.IntegerField()
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    product_name = models.CharField(max_length=255, null=True, blank=True)
+    product_quantity = models.IntegerField(null=True, blank=True)
+    product_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
 
     def __str__(self):
         return f"OrderItem {self.id} for order {self.order.id}"

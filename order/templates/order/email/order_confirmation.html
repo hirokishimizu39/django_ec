@@ -43,16 +43,14 @@
                         <th>商品名</th>
                         <th>数量</th>
                         <th>単価</th>
-                        <th>小計</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for item in order_items %}
                     <tr>
-                        <td>{{ item.product.name }}</td>
-                        <td>{{ item.quantity }}</td>
-                        <td>¥{{ item.price }}</td>
-                        <td>¥{{ item.get_subtotal }}</td>
+                        <td>{{ item.product_name }}</td>
+                        <td>{{ item.product_quantity }}</td>
+                        <td>¥{{ item.product_price }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
