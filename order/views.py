@@ -5,6 +5,8 @@ from .models import Order, OrderItem
 from .forms import BillingAddressForm, PaymentInfoForm
 from cart.utils import get_or_create_cart
 from django.db import transaction
+from django.conf import settings
+from .utils import send_order_confirmation_email
 
 @require_POST
 def purchase(request):
@@ -43,6 +45,9 @@ def purchase(request):
                     quantity=cart_item.quantity,
                     price=cart_item.product.price
                 )
+
+            # メール送信
+            send_order_confirmation_email(order)
 
             # カートをクリア
             cart.delete()

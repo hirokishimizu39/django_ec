@@ -17,6 +17,13 @@ STORAGES = {
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+
+
+"""メール設定: コンソールに出力"""
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+
 if DEBUG:
     def show_toolbar(request):
         return True
@@ -30,3 +37,4 @@ if DEBUG:
     DEBUG_TOOLBAR_CONFIG = {
         'SHOW_TOOLBAR_CALLBACK': show_toolbar,
     }
+
