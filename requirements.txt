@@ -16,3 +16,6 @@ django-cloudinary-storage==0.3.0
 django-debug-toolbar==4.3.0
 
 django-basicauth==0.5.3
+
+# Amazon SES
+django-ses==3.5.0

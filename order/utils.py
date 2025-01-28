@@ -20,11 +20,14 @@ def send_order_confirmation_email(order):
         # htmlタグを削除
         plain_message = strip_tags(html_message)
 
+        # 送信者名を設定（例：Django EC Shop <no-reply@example.com>）
+        from_email = f'Django EC Shop <{settings.DEFAULT_FROM_EMAIL}>'
+
         # メール送信
         send_mail(
             subject='【ご注文確認】ご注文ありがとうございます',
             message=plain_message,
-            from_email=settings.DEFAULT_FROM_EMAIL,
+            from_email=from_email,
             recipient_list=[order.billingaddress.email],
             html_message=html_message,
             fail_silently=False
