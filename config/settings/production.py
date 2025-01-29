@@ -35,7 +35,7 @@ AWS_SES_REGION_NAME = env('AWS_SES_REGION_NAME', default='us-east-1')  # バー�
 AWS_SES_REGION_ENDPOINT = f'email.{AWS_SES_REGION_NAME}.amazonaws.com'
 
 # 送信元メールアドレスの設定（SESで検証済みのメールアドレス）
-DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default='hiroki71027923@icloud.com')
 SERVER_EMAIL = DEFAULT_FROM_EMAIL
 
 # メール送信者名（オプション）
