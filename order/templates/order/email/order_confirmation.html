@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>ご注文確認</title>
+    <title>Order Confirmation</title>
     <style>
         body { font-family: Arial, sans-serif; line-height: 1.6; }
         .container { max-width: 600px; margin: 0 auto; padding: 20px; }
@@ -17,32 +17,32 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>ご注文ありがとうございます</h1>
-            <p>注文番号: {{ order.id }}</p>
-            <p>注文日時: {{ order.created_at|date:"Y年n月j日 G:i" }}</p>
+            <h1>Thank you for your order</h1>
+            <p>Order ID: {{ order.id }}</p>
+            <p>Order Date: {{ order.created_at|date:"Y-m-d H:i" }}</p>
         </div>
 
         <div class="order-details">
-            <h2>配送先情報</h2>
+            <h2>Shipping Information</h2>
             <p>
-                {{ billing_address.last_name }} {{ billing_address.first_name }} 様<br>
-                〒{{ billing_address.zip_code }}<br>
+                {{ billing_address.last_name }} {{ billing_address.first_name }}<br>
+                {{ billing_address.zip_code }}<br>
                 {{ billing_address.country }}<br>
                 {{ billing_address.city }}<br>
                 {{ billing_address.address1 }}<br>
                 {% if billing_address.address2 %}{{ billing_address.address2 }}<br>{% endif %}
-                メール: {{ billing_address.email }}
+                Email: {{ billing_address.email }}
             </p>
         </div>
 
         <div class="order-items">
-            <h2>注文内容</h2>
+            <h2>Order Details</h2>
             <table class="order-items">
                 <thead>
                     <tr>
-                        <th>商品名</th>
-                        <th>数量</th>
-                        <th>単価</th>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -50,17 +50,17 @@
                     <tr>
                         <td>{{ item.product_name }}</td>
                         <td>{{ item.product_quantity }}</td>
-                        <td>¥{{ item.product_price }}</td>
+                        <td>JPY {{ item.product_price }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
-            <p class="total">合計金額: ¥{{ order.total_price }}</p>
+            <p class="total">Total Amount: JPY {{ order.total_price }}</p>
         </div>
 
         <div class="footer">
-            <p>このメールは自動送信されています。返信はできませんのでご了承ください。</p>
-            <p>ご不明な点がございましたら、お問い合わせフォームよりご連絡ください。</p>
+            <p>This is an automated email. Please do not reply.</p>
+            <p>If you have any questions, please contact us through our contact form.</p>
         </div>
     </div>
 </body>
