@@ -24,7 +24,8 @@ MEDIA_URL = '/media/'  # 本番用 URL (Cloudinary が自動提供)
 MEDIA_ROOT = None  # Cloudinary 使用時は不要
 
 
-"""メール設定: Amazon SESを使用（現在の設定）"""
+
+"""メール設定: Amazon SESを使用"""
 # メール送信バックエンド
 EMAIL_BACKEND = 'django_ses.SESBackend'
 
@@ -41,15 +42,8 @@ SERVER_EMAIL = DEFAULT_FROM_EMAIL
 # メール送信者名（オプション）
 EMAIL_SUBJECT_PREFIX = '[Django EC] '
 
-"""Mailgunの設定（現在は未使用）
-# SMTPバックエンド設定
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = env('MAILGUN_SMTP_SERVER')
-# EMAIL_PORT = env('MAILGUN_SMTP_PORT')
-# EMAIL_HOST_USER = env('MAILGUN_SMTP_LOGIN')
-# EMAIL_HOST_PASSWORD = env('MAILGUN_SMTP_PASSWORD')
-# EMAIL_USE_TLS = True
-"""
+
+
 
 # 500エラー出るのでデバッグ機能有効にする
 DEBUG = True
@@ -67,5 +61,42 @@ if DEBUG:
     DEBUG_TOOLBAR_CONFIG = {
         'SHOW_TOOLBAR_CALLBACK': show_toolbar,
     }
+
+
+# ログ設定
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+        },
+    },
+    'loggers': {
+        'order': {  # orderアプリケーションのロガー
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'django': {  # Djangoフレームワークのロガー
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+    },
+}
+
+
 
     
