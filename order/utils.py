@@ -31,7 +31,7 @@ def send_order_confirmation_email(order):
 
         # メール送信
         send_mail(
-            subject=smart_str('【ご注文確認】ご注文ありがとうございます', encoding='utf-8', errors='ignore'),
+            subject=smart_str('【ご注文確認】ご注文ありがとうございます！', encoding='utf-8', errors='ignore'),
             message=plain_message.encode('utf-8', 'ignore').decode('utf-8'),
             from_email=from_email,
             recipient_list=[order.billingaddress.email.encode('utf-8', 'ignore').decode('utf-8')],
