@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}購入明細詳細{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <h1 class="mb-4">購入明細詳細</h1>
+
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">注文情報</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <p><strong>注文番号:</strong> {{ order.id }}</p>
+                            <p><strong>注文日時:</strong> {{ order.created_at|date:"Y年n月j日 G:i" }}</p>
+                            <p><strong>ステータス:</strong>
+                                {% if order.is_completed %}
+                                <span class="badge bg-success">完了</span>
+                                {% else %}
+                                <span class="badge bg-warning">処理中</span>
+                                {% endif %}
+                            </p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p><strong>合計金額:</strong> ¥{{ order.total_price }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">配送先情報</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>お名前:</strong> {{ order.billingaddress.last_name }} {{ order.billingaddress.first_name }}</p>
+                    <p><strong>メールアドレス:</strong> {{ order.billingaddress.email }}</p>
+                    <p><strong>住所:</strong><br>
+                        〒{{ order.billingaddress.zip_code }}<br>
+                        {{ order.billingaddress.country }}<br>
+                        {{ order.billingaddress.city }}<br>
+                        {{ order.billingaddress.address1 }}<br>
+                        {% if order.billingaddress.address2 %}{{ order.billingaddress.address2 }}{% endif %}
+                    </p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">注文商品</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>商品名</th>
+                                    <th>単価</th>
+                                    <th>数量</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in order.orderitem_set.all %}
+                                <tr>
+                                    <td>{{ item.product_name }}</td>
+                                    <td>¥{{ item.product_price }}</td>
+                                    <td>{{ item.product_quantity }}</td>
+                                </tr>
+                                {% endfor %}
+                                <tr>
+                                    <td colspan="3" class="text-end"><strong>合計</strong></td>
+                                    <td class="text-end"><strong>¥{{ order.total_price }}</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <a href="{% url 'order:order_list' %}" class="btn btn-secondary">一覧に戻る</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

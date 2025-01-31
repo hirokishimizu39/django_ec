@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'shop.apps.ShopConfig',
     'cart.apps.CartConfig',
+    'order.apps.OrderConfig',
     'cloudinary_storage',
     'cloudinary',
     'whitenoise.runserver_nostatic',
@@ -127,6 +128,8 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+# Basic認証の設定
 BASICAUTH_USERS = {
-    'admin': 'action',  # ユーザー名: パスワード
+    'admin': 'pw'
 }
+
