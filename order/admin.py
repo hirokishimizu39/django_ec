@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import Order, BillingAddress, PaymentInfo, OrderItem
 # Register your models here.
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('session_id', 'created_at', 'total_price', 'is_completed')
+    list_display = ('session_id', 'created_at', 'total_price', 'final_price', 'promotion_code', 'is_completed')
 
 admin.site.register(Order, OrderAdmin)
 

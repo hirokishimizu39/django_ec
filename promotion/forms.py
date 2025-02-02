@@ -11,6 +11,7 @@ class PromotionCodeForm(forms.Form):
         error_messages={
             'min_length': 'プロモーションコードは7文字で入力してください',
             'max_length': 'プロモーションコードは7文字で入力してください',
+            'required': 'プロモーションコードが入力されていません',
         },
         widget=forms.TextInput(attrs={
             'class': 'form-control',

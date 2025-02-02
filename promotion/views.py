@@ -9,7 +9,7 @@ from django.utils import timezone
 
 @require_POST
 def apply_promotion_code(request):
-    """プロモーションコードを適用する"""
+    """カート内でプロモーションコードを適用し画面に反映する"""
     cart = get_or_create_cart(request)
     if not cart.items.exists():
         messages.warning(request, 'カートが空です。商品を追加してから、プロモーションコードを適用してください。')
@@ -45,17 +45,8 @@ def apply_promotion_code(request):
     return render(request, 'cart/cart.html', context)
 
 
-@require_POST
-def remove_promotion_code(request):
-    """プロモーションコードを削除する"""
-    if 'promotion_code' in request.session:
-        del request.session['promotion_code']
-        messages.success(request, 'プロモーションコードを削除しました')
-    return redirect('cart:cart_view')
-
-
 def process_promotion_code(request, total_price):
-    """プロモーションコードを適用する"""
+    """購入時にプロモーションコードの保存と割引額の計算を行う"""
     promotion = None
     total_price_with_discount = total_price
     if 'promotion_code' in request.session:

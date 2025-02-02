@@ -15,7 +15,7 @@ from promotion.views import process_promotion_code
 def purchase(request):
     with transaction.atomic():
         cart = get_or_create_cart(request)
-        if not cart or not cart.items.exists():
+        if not cart.items.exists():
             messages.warning(request, 'カートが空です。')
             return redirect('cart:cart_view')
 
@@ -79,6 +79,7 @@ def purchase(request):
 
 @method_decorator(basic_auth_required, name='dispatch')
 class OrderListView(ListView):
+    """注文一覧ビュー"""
     model = Order
     template_name = 'order/order_list.html'
     context_object_name = 'orders'
@@ -87,6 +88,7 @@ class OrderListView(ListView):
 
 @method_decorator(basic_auth_required, name='dispatch')
 class OrderDetailView(DetailView):
+    """注文詳細ビュー"""
     model = Order
     template_name = 'order/order_detail.html'
     context_object_name = 'order'
