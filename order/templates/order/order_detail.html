@@ -76,16 +76,11 @@
                                     <td colspan="3" class="py-4 text-end font-bold text-gray-800">
                                         合計
                                     </td>
-                                    {% if order.promotion_code %}
-                                    <td colspan="3" class="py-4 text-end font-bold text-gray-800">
-                                        割引額
-                                    </td>
-                                    <td class="py-4 text-end font-bold text-red-600">
-                                        ¥{{ order.promotion_code.discount_amount}}
-                                    </td>
-                                    {% endif %}
                                     <td class="py-4 text-end font-bold text-lg text-gray-900">
                                         ¥{{ order.final_price }}
+                                        {% if order.promotion_code %}
+                                        <span class="badge bg-info">割引額: ¥{{ order.promotion_code.discount_amount }}</span>
+                                        {% endif %}
                                     </td>
                                 </tr>
                             </tbody>
