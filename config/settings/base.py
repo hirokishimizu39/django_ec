@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'shop.apps.ShopConfig',
     'cart.apps.CartConfig',
     'order.apps.OrderConfig',
+    'promotion.apps.PromotionConfig',
     'cloudinary_storage',
     'cloudinary',
     'whitenoise.runserver_nostatic',

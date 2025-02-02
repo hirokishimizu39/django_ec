@@ -72,9 +72,16 @@
                                     <td>{{ item.product_quantity }}</td>
                                 </tr>
                                 {% endfor %}
-                                <tr>
-                                    <td colspan="3" class="text-end"><strong>合計</strong></td>
-                                    <td class="text-end"><strong>¥{{ order.total_price }}</strong></td>
+                                <tr class="border-t-2 border-gray-200">
+                                    <td colspan="3" class="py-4 text-end font-bold text-gray-800">
+                                        合計
+                                    </td>
+                                    <td class="py-4 text-end font-bold text-lg text-gray-900">
+                                        ¥{{ order.final_price }}
+                                        {% if order.promotion_code %}
+                                        <span class="badge bg-info">割引額: ¥{{ order.promotion_code.discount_amount }}</span>
+                                        {% endif %}
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
