@@ -33,6 +33,7 @@ urlpatterns = [
 
     path('hello/', TemplateView.as_view(template_name='hello.html')),
     path('cart/', include('cart.urls')),
+    path('promotion/', include('promotion.urls')),
     path('order/', include('order.urls')),
     path('', include('shop.urls')),
 ]

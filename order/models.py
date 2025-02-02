@@ -1,11 +1,14 @@
 from django.db import models
 from shop.models import Product
+from promotion.models import PromotionCode
 
 # Create your models here.
 class Order(models.Model):
     session_id = models.CharField(max_length=255, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     total_price = models.DecimalField(max_digits=10, decimal_places=2)
+    final_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    promotion_code = models.ForeignKey(PromotionCode, on_delete=models.SET_NULL, null=True, blank=True, related_name='orders')
     is_completed = models.BooleanField(default=False)
 
     def __str__(self):

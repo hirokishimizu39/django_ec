@@ -15,7 +15,7 @@
                     <th>注文日時</th>
                     <th>お客様名</th>
                     <th>合計金額</th>
-                    <th>ステータス</th>
+                    <th>プロモーションコード</th>
                     <th>操作</th>
                 </tr>
             </thead>
@@ -25,7 +25,12 @@
                     <td>{{ order.id }}</td>
                     <td>{{ order.created_at|date:"Y/m/d H:i" }}</td>
                     <td>{{ order.billingaddress.last_name }} {{ order.billingaddress.first_name }}</td>
-                    <td>¥{{ order.total_price }}</td>
+                    <td>¥{{ order.final_price }}</td>
+                    <td>
+                        {% if order.promotion_code %}
+                        <span class="badge bg-info">{{ order.promotion_code.promotion_code }}</span>
+                        {% endif %}
+                    </td>
                     <td>
                         {% if order.is_completed %}
                         <span class="badge bg-success">完了</span>

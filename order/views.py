@@ -5,11 +5,11 @@ from .models import Order, OrderItem
 from .forms import BillingAddressForm, PaymentInfoForm
 from cart.utils import get_or_create_cart
 from django.db import transaction
-from django.conf import settings
 from .utils import send_order_confirmation_email
 from django.views.generic import ListView, DetailView
 from django.utils.decorators import method_decorator
 from basicauth.decorators import basic_auth_required
+from promotion.views import process_promotion_code
 
 @require_POST
 def purchase(request):
@@ -23,10 +23,16 @@ def purchase(request):
         payment_form = PaymentInfoForm(request.POST)
 
         if billing_form.is_valid() and payment_form.is_valid():
+            # プロモーションコードの処理
+            total_price = cart.total_price
+            promotion_code, total_price_with_discount = process_promotion_code(request, total_price)
+
             # 注文の作成
             order = Order.objects.create(
                 session_id=request.session.session_key,
-                total_price=cart.total_price,
+                total_price=total_price,
+                final_price=total_price_with_discount,
+                promotion_code=promotion_code,
                 is_completed=True
             )
 
@@ -54,7 +60,7 @@ def purchase(request):
 
             # カートをクリア
             cart.delete()
-
+            
             # セッションを更新（新しいセッションキーを生成）DBのセッションの一意性は保ちつつ、続けて購入できるようにする
             request.session.cycle_key()
             
