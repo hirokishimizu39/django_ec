@@ -85,6 +85,9 @@ class OrderListView(ListView):
     context_object_name = 'orders'
     ordering = ['-created_at']
 
+    def get_queryset(self):
+        return Order.objects.select_related('promotion_code')
+
 
 @method_decorator(basic_auth_required, name='dispatch')
 class OrderDetailView(DetailView):
